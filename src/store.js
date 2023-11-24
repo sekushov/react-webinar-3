@@ -73,21 +73,23 @@ class Store {
    * Выделение записи по коду
    * @param code
    */
-  selectItem(code) {
-    this.setState({
-      ...this.state,
-      list: this.state.list.map(item => {
-        if (item.code === code) {
-          item.selected = !item.selected;
-          if (item.selected) {
-            item.title = this.showSelectCount(item);
+  selectItem(code, e) {
+    if (e.target.parentElement.classList != 'Item-actions') {
+      this.setState({
+        ...this.state,
+        list: this.state.list.map(item => {
+          if (item.code === code) {
+            item.selected = !item.selected;
+            if (item.selected) {
+              item.title = this.showSelectCount(item);
+            }
+          } else {
+            item.selected = false;
           }
-        } else {
-          item.selected = false;
-        }
-        return item;
+          return item;
+        })
       })
-    })
+    }
   }
 }
 
