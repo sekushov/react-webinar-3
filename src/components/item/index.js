@@ -18,24 +18,20 @@ function Item(props) {
     onDelete: (e) => {
       e.stopPropagation();
       props.onDelete(props.item.code);
-
+    },
+    onAddToCart: (e) => {
+      e.stopPropagation();
+      props.onAddToCart(props.item.code);
     }
   }
 
   return (
-    <div className={'Item' + (props.item.selected ? ' Item_selected' : '')}
-         onClick={callbacks.onClick}>
+    <div className={'Item'}>
       <div className='Item-code'>{props.item.code}</div>
-      <div className='Item-title'>
-        {props.item.title} {count ? ` | Выделяли ${count} ${plural(count, {
-        one: 'раз',
-        few: 'раза',
-        many: 'раз'
-      })}` : ''}
-      </div>
+      <div className='Item-title'>{props.item.title}</div>
       <div className='Item-actions'>
-        <button onClick={callbacks.onDelete}>
-          Удалить
+        <button onClick={callbacks.onAddToCart}>
+          Добавить
         </button>
       </div>
     </div>
@@ -50,7 +46,8 @@ Item.propTypes = {
     count: PropTypes.number
   }).isRequired,
   onDelete: PropTypes.func,
-  onSelect: PropTypes.func
+  onSelect: PropTypes.func,
+  onAddToCart: PropTypes.func
 };
 
 Item.defaultProps = {
@@ -58,6 +55,8 @@ Item.defaultProps = {
   },
   onSelect: () => {
   },
+  onAddToCart: () => {
+  }
 }
 
 export default React.memo(Item);
