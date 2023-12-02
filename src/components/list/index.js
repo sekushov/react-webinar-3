@@ -3,12 +3,17 @@ import PropTypes from 'prop-types';
 import Item from "../item";
 import './style.css';
 
-function List({list, onDeleteItem, onSelectItem, onAddToCart}) {
+function List({list, onDeleteItem, onSelectItem, onAdd, elements, itemBtnText}) {
   return (
     <div className='List'>{
       list.map(item =>
         <div key={item.code} className='List-item'>
-          <Item item={item} onDelete={onDeleteItem} onSelect={onSelectItem} onAddToCart={onAddToCart}/>
+          <Item item={item} 
+                onDelete={onDeleteItem} 
+                onSelect={onSelectItem} 
+                onAdd={onAdd} 
+                elements={elements}
+                itemBtnText={itemBtnText}/>
         </div>
       )}
     </div>
@@ -21,7 +26,7 @@ List.propTypes = {
   })).isRequired,
   onDeleteItem: PropTypes.func,
   onSelectItem: PropTypes.func,
-  onAddToCart: PropTypes.func
+  onAdd: PropTypes.func
 };
 
 List.defaultProps = {
@@ -29,7 +34,7 @@ List.defaultProps = {
   },
   onSelectItem: () => {
   },
-  onAddToCart: () => {
+  onAdd: () => {
   }
 }
 

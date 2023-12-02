@@ -54,11 +54,11 @@ class Store {
    * Удаление записи по коду
    * @param code
    */
-  deleteItem(code) {
+  deleteItem(code, stateItem) {
     this.setState({
       ...this.state,
       // Новый список, в котором не будет удаляемой записи
-      list: this.state.list.filter(item => item.code !== code)
+      [stateItem]: this.state[stateItem].filter(item => item.code !== code)
     })
   };
 
@@ -118,8 +118,13 @@ class Store {
         }
       )]
     });
-    
-    console.log(this.state.cartList)
+  }
+
+  showModal() {
+    this.setState({
+      ...this.state,
+      showModal: this.state.showModal ? false : true
+    })
   }
 }
 

@@ -18,9 +18,21 @@ function Item(props) {
       e.stopPropagation();
       props.onDelete(props.item.code);
     },
-    onAddToCart: (e) => {
+    onAdd: (e) => {
       e.stopPropagation();
-      props.onAddToCart(props.item.code);
+      props.onAdd(props.item.code);
+    },
+    showElement: () => {
+      if (props.elements) {
+        for (let i of props.elements) {
+          switch (props.elements) {
+            case 'amount': 
+              return (
+                <div className='Item-amount'>{props.item.amount}&nbsp;шт</div>
+              );
+          }
+        }
+      }
     }
   }
 
@@ -29,9 +41,10 @@ function Item(props) {
       <div className='Item-code'>{props.item.code}</div>
       <div className='Item-title'>{props.item.title}</div>
       <div className='Item-price'>{props.item.price.toLocaleString()}&nbsp;&#8381;</div>
+      {callbacks.showElement()}
       <div className='Item-actions'>
-        <button onClick={callbacks.onAddToCart}>
-          Добавить
+        <button onClick={callbacks.onAdd}>
+          {props.itemBtnText}
         </button>
       </div>
     </div>
@@ -47,7 +60,7 @@ Item.propTypes = {
   }).isRequired,
   onDelete: PropTypes.func,
   onSelect: PropTypes.func,
-  onAddToCart: PropTypes.func
+  onAdd: PropTypes.func
 };
 
 Item.defaultProps = {
@@ -55,7 +68,7 @@ Item.defaultProps = {
   },
   onSelect: () => {
   },
-  onAddToCart: () => {
+  onAdd: () => {
   }
 }
 
