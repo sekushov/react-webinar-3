@@ -1,0 +1,8 @@
+.controls-action {
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: 1px dashed #ccc;
+  }
+.font-bold {
+  font-weight: 700;
+}

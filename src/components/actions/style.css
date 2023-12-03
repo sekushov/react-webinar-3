@@ -1,0 +1,10 @@
+.Actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    height: fit-content;
+  }
+.Actions-btn {
+    min-width: 80px;
+    height: 21px;
+}
