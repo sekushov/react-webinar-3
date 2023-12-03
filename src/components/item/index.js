@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import PropTypes from "prop-types";
+import PropTypes, { number } from "prop-types";
+import Actions from "../actions";
 import './style.css';
 
 function Item(props) {
@@ -22,15 +23,32 @@ function Item(props) {
       e.stopPropagation();
       props.onAdd(props.item.code);
     },
-    showElement: () => {
+    /* showElement: (el) => {
       if (props.elements) {
         for (let i of props.elements) {
-          switch (props.elements) {
+          switch (i) {
+            case el === 'code': 
+              return (
+                props.item.code
+              );
             case 'amount': 
               return (
                 <div className='Item-amount'>{props.item.amount}&nbsp;шт</div>
               );
+            case 'result': 
+              return (
+                <div className='Item-result'>{props.item.result}&nbsp;&#8381;</div>
+              );
           }
+        }
+      }
+    } */
+    showItemProp: (num) => {
+      if (props.elements) {
+        switch (props.elements[num]) {
+          case 'price': return (<div className={'Item-' + num}>{props.item[props.elements[num]].toLocaleString()}&nbsp;&#8381;</div>)
+          case 'amount': return (<div className={'Item-' + num}>{props.item[props.elements[num]]}&nbsp;шт</div>)
+          default: return (<div className={'Item-' + num}>{props.item[props.elements[num]]}</div>)
         }
       }
     }
@@ -38,14 +56,12 @@ function Item(props) {
 
   return (
     <div className={'Item'}>
-      <div className='Item-code'>{props.item.code}</div>
-      <div className='Item-title'>{props.item.title}</div>
-      <div className='Item-price'>{props.item.price.toLocaleString()}&nbsp;&#8381;</div>
-      {callbacks.showElement()}
-      <div className='Item-actions'>
-        <button onClick={callbacks.onAdd}>
-          {props.itemBtnText}
-        </button>
+      {callbacks.showItemProp(0)}
+      {callbacks.showItemProp(1)}
+      {callbacks.showItemProp(2)}
+      {callbacks.showItemProp(3)}
+      <div className="Item-4">
+        <Actions actions={props.actions} code={props.item.code}/>
       </div>
     </div>
   );
@@ -55,8 +71,7 @@ Item.propTypes = {
   item: PropTypes.shape({
     code: PropTypes.number,
     title: PropTypes.string,
-    selected: PropTypes.bool,
-    count: PropTypes.number
+    price: PropTypes.number
   }).isRequired,
   onDelete: PropTypes.func,
   onSelect: PropTypes.func,

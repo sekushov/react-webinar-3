@@ -121,6 +121,11 @@ class Store {
   }
 
   showModal() {
+    if (!this.state.showModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
     this.setState({
       ...this.state,
       showModal: this.state.showModal ? false : true

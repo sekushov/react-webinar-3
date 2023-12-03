@@ -4,7 +4,7 @@ import {plural} from "../../utils";
 import './style.css';
 
 
-function Controls({cartList, onAdd}) {
+function Controls({cartList/* , onAdd */}) {
   const countCartAmount = () => {
     let  cartAmount = 0;
     cartList.forEach(item => cartAmount += item.amount);
@@ -21,12 +21,12 @@ function Controls({cartList, onAdd}) {
   return (
     <div className='Controls'>
       <div>В корзине:&nbsp;</div>
-      <div>{
+      <div className={'Controls-item'}>{
         countCartAmount() !== 'пусто' 
         ? countCartAmount() + ' / ' + countCartPrice() 
         : countCartAmount()
       }</div>
-      <button onClick={() => onAdd()}>Перейти</button>
+      {/* <button onClick={() => onAdd()}>Перейти</button> */}
     </div>
   )
 }

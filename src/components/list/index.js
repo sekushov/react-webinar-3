@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Item from "../item";
 import './style.css';
 
-function List({list, onDeleteItem, onSelectItem, onAdd, elements, itemBtnText}) {
+function List({list, onDeleteItem, onSelectItem,/*  onAdd, */ elements, actions}) {
   return (
     <div className='List'>{
       list.map(item =>
@@ -11,9 +11,9 @@ function List({list, onDeleteItem, onSelectItem, onAdd, elements, itemBtnText}) 
           <Item item={item} 
                 onDelete={onDeleteItem} 
                 onSelect={onSelectItem} 
-                onAdd={onAdd} 
+                // onAdd={onAdd} 
                 elements={elements}
-                itemBtnText={itemBtnText}/>
+                actions={actions}/>
         </div>
       )}
     </div>

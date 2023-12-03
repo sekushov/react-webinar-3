@@ -1,25 +1,28 @@
 .Item {
   display: flex;
-  justify-content: flex-start;
-  transition: background-color 1s;
+  justify-content: space-between;
+  background-color: #fff;
+  min-height: 60px;
 }
-
-.Item_selected {
-  background: #75aaf1;
-  color: #fff;
-}
-
-.Item-code {
+.Item-0 {
   padding: 20px 10px 20px 20px;
 }
-
-.Item-title {
-  width: 100%;
+.Item-1 {
+  width: 60%;
   padding: 20px 10px;
 }
-
-.Item-actions {
-  display: flex;
-  justify-content: flex-end;
-  padding: 20px 20px 20px 10px;
+.Item-2 {
+  width: 100px;
+  padding: 20px 10px;
+  text-align: right;
+  color: #404040;
+}
+.Item-3 {
+  width: 100px;
+  padding: 20px 4px;
+  text-align: right;
+  color: #404040;
+}
+.Item-4 {
+  width: 120px;
 }
