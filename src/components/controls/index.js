@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import {plural} from "../../utils";
 import './style.css';
 
+// отображает количество товаров и сумму в корзине
 
-function Controls({cartList/* , onAdd */}) {
-  const countCartAmount = () => {
+function Controls({cartList}) {
+  const countCartAmount = () => {     // считаем количество
     let  cartAmount = 0;
     cartList.forEach(item => cartAmount += item.amount);
     return cartAmount ? `${cartAmount} ${plural(cartAmount, {
@@ -14,7 +15,7 @@ function Controls({cartList/* , onAdd */}) {
       many: 'товаров'
     })}` : 'пусто'
   };
-  const countCartPrice = () => {
+  const countCartPrice = () => {      // считаем стоимость
     let cartPrice = 0;cartList.forEach(item => cartPrice += item.price * item.amount);
     return cartPrice.toLocaleString() + ' ₽'
   }
@@ -26,19 +27,12 @@ function Controls({cartList/* , onAdd */}) {
         ? countCartAmount() + ' / ' + countCartPrice() 
         : countCartAmount()
       }</div>
-      {/* <button onClick={() => onAdd()}>Перейти</button> */}
     </div>
   )
 }
 
 Controls.propTypes = {
-  cartList: PropTypes.array,
-  onAdd: PropTypes.func
+  cartList: PropTypes.arrayOf(PropTypes.object).isRequired
 };
-
-Controls.defaultProps = {
-  cartList: () => {},
-  onAdd: () => {}
-}
 
 export default React.memo(Controls);

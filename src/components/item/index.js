@@ -1,49 +1,11 @@
-import React, {useState} from "react";
-import PropTypes, { number } from "prop-types";
+import React from "react";
+import PropTypes from "prop-types";
 import Actions from "../actions";
 import './style.css';
 
 function Item(props) {
-
-  // Счётчик выделений
-  const [count, setCount] = useState(0);
-
   const callbacks = {
-    onClick: () => {
-      props.onSelect(props.item.code);
-      if (!props.item.selected) {
-        setCount(count + 1);
-      }
-    },
-    onDelete: (e) => {
-      e.stopPropagation();
-      props.onDelete(props.item.code);
-    },
-    onAdd: (e) => {
-      e.stopPropagation();
-      props.onAdd(props.item.code);
-    },
-    /* showElement: (el) => {
-      if (props.elements) {
-        for (let i of props.elements) {
-          switch (i) {
-            case el === 'code': 
-              return (
-                props.item.code
-              );
-            case 'amount': 
-              return (
-                <div className='Item-amount'>{props.item.amount}&nbsp;шт</div>
-              );
-            case 'result': 
-              return (
-                <div className='Item-result'>{props.item.result}&nbsp;&#8381;</div>
-              );
-          }
-        }
-      }
-    } */
-    showItemProp: (num) => {
+    showItemProp: (num) => {    // формируем отображение элементов
       if (props.elements) {
         switch (props.elements[num]) {
           case 'price': return (<div className={'Item-' + num}>{props.item[props.elements[num]].toLocaleString()}&nbsp;&#8381;</div>)
@@ -56,6 +18,7 @@ function Item(props) {
 
   return (
     <div className={'Item'}>
+      {/* отображаем элементы по столбцам */}
       {callbacks.showItemProp(0)}
       {callbacks.showItemProp(1)}
       {callbacks.showItemProp(2)}
@@ -72,19 +35,15 @@ Item.propTypes = {
     code: PropTypes.number,
     title: PropTypes.string,
     price: PropTypes.number
-  }).isRequired,
-  onDelete: PropTypes.func,
-  onSelect: PropTypes.func,
-  onAdd: PropTypes.func
+  }),
+  elements: PropTypes.array,
+  actions: PropTypes.arrayOf(PropTypes.object)
 };
 
 Item.defaultProps = {
-  onDelete: () => {
-  },
-  onSelect: () => {
-  },
-  onAdd: () => {
-  }
+  item: {},
+  elements: [],
+  actions: []
 }
 
 export default React.memo(Item);
