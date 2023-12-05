@@ -7,8 +7,7 @@ import './style.css';
 
 function Controls({cartList}) {
   const countCartAmount = () => {     // считаем количество
-    let  cartAmount = 0;
-    cartList.forEach(item => cartAmount += item.amount);
+    const  cartAmount = cartList.length;
     return cartAmount ? `${cartAmount} ${plural(cartAmount, {
       one: 'товар',
       few: 'товара',
